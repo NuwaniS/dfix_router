@@ -1,0 +1,22 @@
+#!/bin/bash
+#JBOSS_5 = 0, JBOSS_6 = 1, JBOSS_6_EAP = 2, JBOSS_7.3_EAP = 3, JBOSS_7.4_EAP = 4 , WS = 5 ,MQ9=6
+SERVERS=(JBOSS_5 JBOSS_6 JBOSS_6_EAP JBOSS_7.3_EAP JBOSS_7.4_EAP WS MQ9)
+SERVER_TYPE=4
+
+JAVA_OPTS="-Xms512M -Xmx1024M -XX:-UseGCOverheadLimit"
+#-Djavax.net.ssl.keyStore=keystore -Djavax.net.ssl.keyStorePassword=password"
+
+##### Setting for DFIXCluster ###
+#JAVA_OPTS="$JAVA_OPTS -Djgroups.bind_addr=192.168.14.111 -Djgroups.tcpping.initial_hosts=192.168.14.111[7200],192.168.14.134[7200]"
+
+cd $(dirname $0)
+CLASSPATH=.
+for lib_jar in ./lib/*.jar; do  CLASSPATH=${CLASSPATH}:${lib_jar}; done
+for lib_jar in ./lib/DFN/*.jar; do  CLASSPATH=${CLASSPATH}:${lib_jar}; done
+for lib_jar in ./lib/${SERVERS[${SERVER_TYPE}]}/*.jar; do  CLASSPATH=${CLASSPATH}:${lib_jar}; done
+
+export CLASSPATH
+mkdir -p logs
+echo "Using Java from: $(which java)"
+nohup java --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED $JAVA_OPTS -classpath $CLASSPATH com.mubasher.oms.dfixrouter.server.DFIXRouterManager > logs/dfix-out &
+#/app/java/jdk1.8.0_121/bin/java $JAVA_OPTS -classpath $CLASSPATH com.mubasher.oms.dfixrouter.server.DFIXRouterManager

@@ -1,0 +1,27 @@
+[default]
+FileStorePath=./quick_fix/output/data/oms
+FileLogPath=./logs/sessions
+BeginString=FIX.4.2
+ReconnectInterval=10
+HeartBtInt=5
+CheckLatency=N
+AllowUnknownMsgFields=Y
+ValidateFieldsOutOfOrder=N
+ValidateUserDefinedFields=N
+ValidateUnorderedGroupFields=N
+ValidateIncomingMessage=N
+TimeZone=Asia/Colombo
+NonStopSession=Y
+DataDictionary=./quick_fix/etc/FIX42_TDWL.xml
+
+[session]
+SessionIdentifier=TDWL
+SessionNo=1
+ConnectionType=initiator
+SenderCompID=TDWL
+TargetCompID=SLGM0
+SessionQualifier=TDWL
+SocketConnectHost={{ SIM_SERVER_IP }}
+SocketConnectPort={{ SIM_PORT }}
+HeartBtInt=20
+

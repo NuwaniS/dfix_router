@@ -1,0 +1,46 @@
+#!/bin/bash
+#---------------------------------------------------------------------
+###### Please Change the variable according to the Environment #######
+#---------------------------------------------------------------------
+########################   DFNNTPFLCNS  ########################
+########################   DFNNTPFLCNC  ########################
+########################   DFNNTPBOS    ########################
+########################   DFNNTP-OMS   ########################
+########################   DFNNTPGW     ########################
+########################   DFIXRTR	  	########################
+########################   DFNMSGRTR	########################
+########################   DFNCSM		########################
+########################   DFNSIMULATOR ########################
+#---------------------------------------------------------------------
+COMP_NAME="DFIXRTR"
+#This IP Use in OMS Only
+SERVER_IP="{{ SERVER_IP }}"
+MIN_MEMORY="2048m"
+MAX_MEMORY="2048m"
+#---------------------------------------------------------------------
+#### cpu:min_cpu_limit 			===> 25% of CPU
+#### cpu:above_min_cpu_limit	===> 50% of CPU
+#### cpu:mid_cpu_limit			===> 75% of CPU
+#### cpu:max_cpu_limit			===> 100% of CPU
+#
+# Before Apply this feature, In system should configured above groups
+#---------------------------------------------------------------------
+CPU_LIMIT=""
+#---------------------------------------------------------------------
+######################## DFIX CONFIGURATIONS #########################
+#JBOSS_5 = 0, JBOSS_6 = 1, JBOSS_6_EAP = 2, JBOSS_7_EAP = 3, WS = 4
+######################################################################
+SERVER_TYPE="3"
+DFIXCLUSTER="-Djgroups.bind_addr=127.0.0.1 -Djgroups.tcpping.initial_hosts=127.0.0.1[7200]"
+#---------------------------------------------------------------------
+## If below parameter is "Y", Backup the Logs When stop the Component
+## If Logman Configure, Please Set below parameter as "N"
+#---------------------------------------------------------------------
+LOG_BKP_ENABLED="Y"
+#---------------------------------------------------------------------
+######################## DEV ARGUMENTS  ########################
+######################################################################
+#If you need clear logs before start, Please Change below parameter as "Y"
+LOG_CLEAN_ENABLED="N"
+#If you need run in debug mode, Please Change below parameter as "Y"
+DEBUG_ENABLED="N"

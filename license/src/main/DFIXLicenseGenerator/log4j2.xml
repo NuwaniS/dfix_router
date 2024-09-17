@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p  %c{1} (%F:%L) (%t) (%X{uniqueRequestId}) %msg%n"/>
+        </Console>
+
+        <RollingFile name="MyFile" fileName="logs/DFIXRouterLicense.log" filePattern="logs/DFIXRouterLicense-%d{yyyy-MM-dd}-%i.log"
+                     immediateFlush="true" append="false">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p  %c{1} (%F:%L) (%t) (%X{uniqueRequestId}) %msg" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <SizeBasedTriggeringPolicy size="100MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="100" />
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+
+        <AsyncLogger name="com.mubasher.oms.dfixrouter" level="DEBUG" additivity="false">
+            <AppenderRef ref="MyFile"/>
+        </AsyncLogger>
+
+        <AsyncRoot level="DEBUG" additivity="false">
+            <AppenderRef ref="CONSOLE"/>
+        </AsyncRoot>
+    </Loggers>
+</Configuration>

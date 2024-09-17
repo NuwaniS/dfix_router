@@ -1,0 +1,77 @@
+#######################################################
+            DFIXRouter Manual
+#######################################################
+* Commands(Case Insensitive) available in the system.
+    1. shutdown
+        - To exit the application.
+
+    2. reload
+        - To reload all the settings and re-initiate the sessions.
+
+    3. reset_out_seq,<SessionIdentifier>,<NewSequenceNo>
+        - To reset the expected outgoing message sequence number for a particular session.
+            - Ex: reset_out_seq,TDWL,25
+
+    4. reset_in_seq,<SessionIdentifier>,<NewSequenceNo>
+        - To reset the expected incoming message sequence number for a particular session.
+            - Ex: reset_in_seq,TDWL,25
+
+    5. connect,<SessionIdentifier>
+            - To connect given initiator session
+                - Ex: connect,TDWL
+            - To connect all sessions use the 'all' as session identifier.
+                - Ex: connect,all
+
+    6. disconnect,<SessionIdentifier>
+        - To disconnect given initiator session
+            - Ex: disconnect,TDWL
+        - To disconnect all sessions use the 'all' as session identifier.
+            - Ex: disconnect,all
+
+    7. eod,<SessionIdentifier>
+        - To run eod for a session
+            - Ex: eod,TDWL
+        - To run eod for all sessions  use the 'all' as session identifier.
+            - Ex: eod,all
+	
+    8. activate
+        - Open connections to the App Server and Exchange
+	
+    9. passivate
+        - Close connections of the App Server and Exchange
+
+    10. show_status
+        - List connections to the trading platform and their status
+
+    11. quit
+        - Close the Telnet Client.
+
+    12. exit
+        - Close the Telnet Client.
+
+    13. set_market_status,<Exchange>,<Market Code>,<Status>
+        - Ex: set_market_status,KSE,REG,ACCEPTANCE
+
+    14. release,<SessionIdentifier>
+        - To release the sustained block of the session.
+            - Ex: release,TDWL
+
+    15. store_message,<SessionIdentifier>,<SequenceNo>,<FixMessage>
+        - To store a Fix Message in a particular Session's Message Store.
+
+    16. send_message,<SessionIdentifier>,<FixMessage>
+        - To send a Fix Message to a particular Session.
+            - Ex: send_message,SLGM0,8=FIXT.1.19=12535=j34=49252=20181024-12:16:52.04649=99856=047372=U28380=445=49258=Transaction is only allowed between 09:00 - 15:0010=217
+
+    17. get_messages,<SessionIdentifier>,<startSeqNo>,<endSeqNo>
+        - To get/fetch Fix Messages from a particular Session's Message Store.
+            - Ex: get_messages,SLGM0,1,10
+
+    18. change_password
+        - to change the telnet console password.
+        - Enter your
+            - old password on the next prompt , and
+            - new password ,
+            - confirm new password , on the susequent liness.
+
+    HINT :  Type "[A" to execute the last executed command once again.
